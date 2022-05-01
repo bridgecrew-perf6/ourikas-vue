@@ -1,24 +1,14 @@
 <template>
-  <img alt="Ourikas logo" src="./assets/logo.png">
-  
-  <ul>
-    <li>
-      <router-link to="/">Home</router-link>
-    </li>
-    <li>
-      <router-link to="/companies">Empresas</router-link>
-    </li>
-    <li>
-      <router-link to="/about">sobre</router-link>
-    </li>
-  </ul>
-  <router-view />
+  <Header />
 </template>
 
 <script>
-
+import Header from '@/components/Header.vue';
 
 export default {
   name: 'App',
+  components: {
+    Header,
+  }
 }
 </script>
