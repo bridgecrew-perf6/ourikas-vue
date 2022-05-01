@@ -1,56 +1,72 @@
 <template>
 <div class="container">
- <form action="">
-     <div class="control">
-        <input class="input is-medium is-success" type="search" placeholder="Busque por uma empresa..." value="">
+    <div class="columns is-flex is-centered">
+        <a href="#">
+            <span class="title is-size-1 has-text-primary has-text-weight-bold">{ OuriVue }</span>
+        </a>
     </div>
- </form>
- 
- <br>
+    <br>
+    <form>
+        <div class="control">
+            <input
+                class="input is-medium is-success"
+                type="search"
+                placeholder="Busque por uma empresa..."
+                v-model="search"
+             />
+        </div>
+    </form>
+    
+    <br>
 
-<div class="columns is-multiline">
-    <div v-for="company in companies" :key="company.id" class="column is-4">
-        <router-link :to="{name: 'company', params: { alias: company.alias, id: company.id }}">
-            <div class="card py-5 px-5">
-                <span class="title mr-3">{{ company.name.length > 20 ? company.name.substr(0, 20) + '...' : company.name }}</span>
-                <span :class="company.status ? 'tag is-primary' : 'tag is-danger'">{{ company.status ? 'ativa' : 'inativa' }}</span>
-                
-                <p class="subtitle mt-3">{{ company.description.length > 50 ? company.description.substr(0, 50) + '...' : company.description }}</p>
-                <ul v-for="(kword, index) in wordsArray" :key="index">
-                    <li class="tag is-black">{{ kword }}</li>
-                </ul>
-            </div>
-        </router-link>
+    <div v-if="companiesFilter.length > 0" class="columns is-multiline">
+        <div v-for="company in companiesFilter" :key="company.id" class="column is-4">
+            <router-link :to="{name: 'company', params: { alias: company.alias, id: company.id }}">
+                <div class="card py-5 px-5">
+                    <span class="title mr-3">{{ company.name.length > 20 ? company.name.substr(0, 20) + '...' : company.name }}</span>
+                    <span :class="company.status ? 'tag is-primary' : 'tag is-danger'">{{ company.status ? 'ativa' : 'inativa' }}</span>
+                    
+                    <p class="subtitle mt-3">{{ company.description.length > 50 ? company.description.substr(0, 50) + '...' : company.description }}</p>
+                    <ul>
+                        <li class="tag is-black"></li>
+                    </ul>
+                </div>
+            </router-link>
+        </div>
     </div>
-</div>
+    <p v-else class="columns is-centered is-size-2 m-5 p-5">Nenhum resultado encontrado...</p>
 </div>
 </template>
 
 <script>
-import { onBeforeMount, ref } from '@vue/runtime-core'
+import { computed, onBeforeMount, ref } from '@vue/runtime-core'
 import api from '@/services/Api'
 
 export default {
     name: 'CompaniesList',
     setup() {
         const companies = ref([]);
+        const search = ref("");
 
-        const fetchCompanies = () => api.get("/companies.json")
-        .then((res) => {
-            companies.value = res.data;
+        onBeforeMount(() => {
+            api.get("/companies.json")
+            .then((res) => companies.value = res.data);
         });
-    
-        onBeforeMount(fetchCompanies);
 
-        function keywords(words) {
-            const wordsArray = words.split(",", 5);
-            return wordsArray;
+        const companiesFilter = computed(() => {
+            return companies.value.filter((comp) => {
+                return search.value
+                    .toLowerCase()
+                    .split(' ')
+                    .every(c => comp.name.toLowerCase().includes(c));
+            });
+        });
+
+        return {
+            search,
+            companies,
+            companiesFilter
         }
-
-    return {
-        companies,
-        keywords
     }
-  }
 }
 </script>
