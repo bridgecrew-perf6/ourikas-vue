@@ -5,45 +5,42 @@
             <span :class="comp.status ? 'tag is-primary is-medium' : 'tag is-warning is-medium' ">{{ comp.status ? 'Ativa' : 'Inativa' }}</span>
             <br>
             <p class="subtitle">{{ comp.description }}</p>
-            <ul>
-                <li>{{ comp.keywords }}</li>
+            <ul v-if="comp.keywords.length > 0">
+                <li class="tag is-primary m-1" v-for="(tag, index) in splitTags(comp.keywords)" :key="index">{{ tag }}</li>
             </ul>
 
             <br>
 
-            <h3 class="tag is-primary is-size-5 has-text-weight-bold mb-3">Contatos:</h3>
+            <h3 class="is-size-5 has-text-weight-bold mb-3">Contatos:</h3>
             <div class="ml-2">
+                <span class="button is-dark mr-3" v-if="comp.contact.email">{{ comp.contact.email }}</span>
                 
-                <span class="subtitle">e-mail: {{ comp.contact.email }}</span>
-                <br>
-                <span class="subtitle">
-                    site:
-                    <a :href="comp.contact.site" target="_blank">
+                <span v-if="comp.contact.site">
+                    <a :href="comp.contact.site" target="_blank" class="button is-warning mr-3">
                         acessar site
                     </a>
                 </span>
-                <br>
-                <span class="subtitle">
-                    facebook: 
-                    <a :href="comp.contact.facebook" target="_blank">
+                
+                <span v-if="comp.contact.facebook">
+                    <a :href="comp.contact.facebook" target="_blank" class="button is-link">
                         página no facebook
                     </a>
                 </span>
                 <br><br>
-                <span class="subtitle">telefones: </span>
-                <span class="subtitle" v-for="(contact, index) in comp.contact.phones" :key="index">
+                <span class="button is-info mr-2" v-for="(contact, index) in comp.contact.phones" :key="index">
                     {{ contact }}
                 </span>
             </div>
 
             <br>
 
-            <h3 class="tag is-primary is-size-5 has-text-weight-bold mb-3">Endereço</h3>
-            <br>
+            <h3 class="is-size-5 has-text-weight-bold mb-3">Endereço</h3>
             <div class="ml-2">
-                <span class="subtitle">{{ comp.address.street }} | CEP: {{ comp.address.zip }}</span>
+                <span class="subtitle" v-show="comp.address.street">{{ comp.address.street }}</span>
                 <br>
-                <span class="subtitle">{{ comp.address.city }} / {{ comp.address.state }}</span>
+                <span class="subtitle" v-show="comp.address.zip">CEP: {{ comp.address.zip }}</span>
+                <br>
+                <span class="subtitle" v-show="comp.address.city">{{ comp.address.city }} / {{ comp.address.state }}</span>
             </div>
         </div>
     </div>
@@ -71,8 +68,13 @@ export default {
             company.value = data.filter((comp) => comp.id == id);
         }
 
+        const splitTags = (tags) => {
+            return tags.split(",");
+        }
+
         return {
-            company
+            company,
+            splitTags
         }
     }
 }
