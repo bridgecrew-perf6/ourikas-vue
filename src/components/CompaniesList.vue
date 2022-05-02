@@ -27,8 +27,8 @@
                     <span :class="company.status ? 'tag is-primary' : 'tag is-danger'">{{ company.status ? 'ativa' : 'inativa' }}</span>
                     
                     <p class="subtitle mt-3">{{ company.description.length > 50 ? company.description.substr(0, 50) + '...' : company.description }}</p>
-                    <ul>
-                        <li class="tag is-black"></li>
+                    <ul v-if="company.keywords">
+                        <li class="tag is-black m-1" v-for="(tag, index) in splitTags(company.keywords)" :key="index">{{ tag }}</li>
                     </ul>
                 </div>
             </router-link>
@@ -62,10 +62,15 @@ export default {
             });
         });
 
+        const splitTags = (tags) => {
+            return tags.split(",");
+        }
+
         return {
             search,
             companies,
-            companiesFilter
+            companiesFilter,
+            splitTags
         }
     }
 }
