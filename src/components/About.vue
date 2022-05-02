@@ -2,7 +2,7 @@
     <div class="container">
         <div class="has-background-primary m-5 p-5">
             <div class="columns is-flex is-centered">
-                <img src="https://avatars.githubusercontent.com/u/7742471?s=200&v=4">
+                <img src="../assets/images/logo-ourikas-white.png" width="200">
             </div>
 
             <h1 class="title has-text-white is-size-2 has-text-centered has-text-weight-bold">Ourikas em Vuejs 3</h1>
