@@ -1,9 +1,7 @@
 <template>
 <div class="container">
     <div class="columns is-flex is-centered">
-        <a href="#">
-            <span class="title is-size-1 has-text-primary has-text-weight-bold">{ OuriVue }</span>
-        </a>
+        <span class="is-size-1 has-text-primary has-text-weight-bold">OuriVue</span>
     </div>
     <br>
     <form>
@@ -27,9 +25,6 @@
                     <span :class="company.status ? 'tag is-primary' : 'tag is-danger'">{{ company.status ? 'ativa' : 'inativa' }}</span>
                     
                     <p class="subtitle mt-3">{{ company.description.length > 50 ? company.description.substr(0, 50) + '...' : company.description }}</p>
-                    <ul v-if="company.keywords">
-                        <li class="tag is-black m-1" v-for="(tag, index) in splitTags(company.keywords)" :key="index">{{ tag }}</li>
-                    </ul>
                 </div>
             </router-link>
         </div>
@@ -62,15 +57,10 @@ export default {
             });
         });
 
-        const splitTags = (tags) => {
-            return tags.split(",");
-        }
-
         return {
             search,
             companies,
-            companiesFilter,
-            splitTags
+            companiesFilter
         }
     }
 }
