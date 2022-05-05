@@ -1,46 +1,48 @@
 <template>
-    <div class="max-w-sm rounded overflow-hidden shadow-lg">
-        <div v-for="comp in company" :key="comp.id" class="flex justify-center md:justify-end -mt-16">
-            <span class="font-bold text-xl mb-2">{{ comp.name }}</span>
-            <span :class="comp.status ? 'tag is-primary is-medium' : 'tag is-warning is-medium' ">{{ comp.status ? 'Ativa' : 'Inativa' }}</span>
+    <div class="container my-10 mx-auto px-4 md:px-2">
+        <div v-for="comp in company" :key="comp.id" class="p-5 text-cyan-900 bg-white rounded-lg border border-gray-200 shadow-md">
+            <div class="mb-2">
+                <span class="font-bold text-5xl">{{ comp.name }}</span>
+                <span :class="comp.status ? '' : '' ">{{ comp.status ? 'Ativa' : 'Inativa' }}</span>
+            </div>
             <br>
-            <p class="subtitle">{{ comp.description }}</p>
+            <p class="">{{ comp.description }}</p>
             <ul v-if="comp.keywords.length > 0">
-                <li class="tag is-primary m-1" v-for="(tag, index) in splitTags(comp.keywords)" :key="index">{{ tag }}</li>
+                <li class="" v-for="(tag, index) in splitTags(comp.keywords)" :key="index">{{ tag }}</li>
             </ul>
 
             <br>
 
-            <h3 class="is-size-5 has-text-weight-bold mb-3">Contatos:</h3>
-            <div class="ml-2">
-                <span class="button is-dark mr-3" v-if="comp.contact.email">{{ comp.contact.email }}</span>
+            <h3 class="">Contatos:</h3>
+            <div class="">
+                <span class="" v-if="comp.contact.email">{{ comp.contact.email }}</span>
                 
                 <span v-if="comp.contact.site">
-                    <a :href="comp.contact.site" target="_blank" class="button is-warning mr-3">
+                    <a :href="comp.contact.site" target="_blank" class="">
                         acessar site
                     </a>
                 </span>
                 
                 <span v-if="comp.contact.facebook">
-                    <a :href="comp.contact.facebook" target="_blank" class="button is-link">
+                    <a :href="comp.contact.facebook" target="_blank" class="">
                         página no facebook
                     </a>
                 </span>
                 <br><br>
-                <span class="button is-info mr-2" v-for="(contact, index) in comp.contact.phones" :key="index">
+                <span class="" v-for="(contact, index) in comp.contact.phones" :key="index">
                     {{ contact }}
                 </span>
             </div>
 
             <br>
 
-            <h3 class="is-size-5 has-text-weight-bold mb-3">Endereço</h3>
-            <div class="ml-2">
-                <span class="subtitle" v-show="comp.address.street">{{ comp.address.street }}</span>
+            <h3 class="">Endereço</h3>
+            <div class="">
+                <span class="" v-show="comp.address.street">{{ comp.address.street }}</span>
                 <br>
-                <span class="subtitle" v-show="comp.address.zip">CEP: {{ comp.address.zip }}</span>
+                <span class="" v-show="comp.address.zip">CEP: {{ comp.address.zip }}</span>
                 <br>
-                <span class="subtitle" v-show="comp.address.city">{{ comp.address.city }} / {{ comp.address.state }}</span>
+                <span class="" v-show="comp.address.city">{{ comp.address.city }} / {{ comp.address.state }}</span>
             </div>
         </div>
     </div>
