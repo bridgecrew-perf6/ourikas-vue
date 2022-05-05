@@ -1,13 +1,13 @@
 <template>
-<div class="container">
-    <div class="columns is-flex is-centered">
-        <span class="is-size-1 has-text-primary has-text-weight-bold">OuriVue</span>
+<div class="sm:container sm:mx-auto">
+    <div class="">
+        <span class="">OuriVue</span>
     </div>
     <br>
     <form>
         <div class="control">
             <input
-                class="input is-medium is-success"
+                class="shadow appearance-none border rounded w-full py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 type="search"
                 placeholder="Busque por uma empresa..."
                 v-model="search"
@@ -17,14 +17,14 @@
     
     <br>
 
-    <div v-if="companiesFilter.length > 0" class="columns is-multiline">
-        <div v-for="company in companiesFilter" :key="company.id" class="column is-4">
+    <div v-if="companiesFilter.length > 0" class="grid grid-cols-3 gap-6">
+        <div v-for="company in companiesFilter" :key="company.id" class="block p-3 bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-200">
             <router-link :to="{name: 'company', params: { alias: company.alias, id: company.id }}">
                 <div class="card py-5 px-5">
-                    <span class="title mr-3">{{ company.name.length > 20 ? company.name.substr(0, 20) + '...' : company.name }}</span>
+                    <span class="mb-5 text-4xl font-bold">{{ company.name.length > 20 ? company.name.substr(0, 20) + '...' : company.name }}</span>
                     <span :class="company.status ? 'tag is-primary' : 'tag is-danger'">{{ company.status ? 'ativa' : 'inativa' }}</span>
                     
-                    <p class="subtitle mt-3">{{ company.description.length > 50 ? company.description.substr(0, 50) + '...' : company.description }}</p>
+                    <p class="mt-5 text-2xl">{{ company.description.length > 50 ? company.description.substr(0, 50) + '...' : company.description }}</p>
                 </div>
             </router-link>
         </div>

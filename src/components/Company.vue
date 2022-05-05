@@ -1,7 +1,7 @@
 <template>
-    <div class="container card m-5 p-5">
-        <div v-for="comp in company" :key="comp.id">
-            <span class="is-size-1 mr-4">{{ comp.name }}</span>
+    <div class="max-w-sm rounded overflow-hidden shadow-lg">
+        <div v-for="comp in company" :key="comp.id" class="flex justify-center md:justify-end -mt-16">
+            <span class="font-bold text-xl mb-2">{{ comp.name }}</span>
             <span :class="comp.status ? 'tag is-primary is-medium' : 'tag is-warning is-medium' ">{{ comp.status ? 'Ativa' : 'Inativa' }}</span>
             <br>
             <p class="subtitle">{{ comp.description }}</p>
