@@ -17,7 +17,7 @@
     
     <br>
 
-    <div v-if="companiesFilter.length > 0" class="grid grid-cols-3 gap-3">
+    <div v-if="companiesFilter.length > 0" class="grid lg:grid-cols-3 gap-2">
         <div v-for="company in companiesFilter" :key="company.id" class="p-3 bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-200">
             <router-link :to="{name: 'company', params: { alias: company.alias, id: company.id }}">
                 <div class="flex justify-between py-3 px-4">
