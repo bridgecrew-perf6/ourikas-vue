@@ -1,2 +1,2 @@
 "use strict";(self["webpackChunkourikas_vue"]=self["webpackChunkourikas_vue"]||[]).push([[634],{634:function(e,n,r){r.r(n),r.d(n,{default:function(){return c}});var u=r(3396);const t={class:"text-3xl font-bold underline"};function o(e,n){return(0,u.wg)(),(0,u.iD)("h1",t," Hello world! ")}var s=r(89);const l={},a=(0,s.Z)(l,[["render",o]]);var c=a}}]);
-//# sourceMappingURL=634.e0fb29b0.js.map
+//# sourceMappingURL=634.0ecbabba.js.map
